@@ -12,6 +12,7 @@
   - [Contents](#contents)
   - [Required](#required)
   - [About Air](#about-air)
+  - [Docker(Windows)](#dockerwindows)
 
 ## Required
 
@@ -37,5 +38,10 @@ go install github.com/cosmtrek/air@latest
 How to use
 ```bash
 air
+```
+
+## Docker(Windows)
+```
+docker build -f .\docker\Dockerfile -t roll:1 .
 ```
 

@@ -49,7 +49,7 @@ func (c *Controller) Register(ctx *gin.Context) {
 // @Description 检查用户名
 // @Param username query string true "用户名"
 // @Success  200 object schemas.UniResponse ""
-// @Route /v1/register/check_username [get]
+// @Route /v1/register/check_user [get]
 func (c *Controller) CheckUsername(ctx *gin.Context) {
 	username := ctx.Query("username")
 

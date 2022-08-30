@@ -15,12 +15,8 @@
   },
   "servers": [
     {
-      "url": "http://127.0.0.1",
-      "description": " LocalTest"
-    },
-    {
-      "url": "http://www.domainname.com",
-      "description": " Production"
+      "url": "/",
+      "description": "Default Server URL"
     }
   ],
   "paths": {
@@ -45,7 +41,7 @@
         "security": null
       }
     },
-    "/v1/register/check_username": {
+    "/v1/register/check_user": {
       "get": {
         "responses": {
           "200": {

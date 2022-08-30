@@ -15,9 +15,13 @@ import (
 )
 
 func InitAndStartServer() {
+	// Get current path
+	currentPath := utils.GetCurrentPath()
+	configPath := currentPath + "/server/config/settings_dev.json"
 	env := os.Getenv("env")
 
 	if env == "release" {
+		configPath = currentPath + "/server/config/settings.json"
 		gin.SetMode(gin.ReleaseMode)
 	} else if env == "test" {
 		gin.SetMode(gin.TestMode)
@@ -26,7 +30,7 @@ func InitAndStartServer() {
 	ginEngine := gin.New()
 
 	// Load config
-	loadSettings()
+	loadSettings(configPath)
 
 	// Middleware
 	ginEngine.Use(cors.New(cors.Config{
@@ -48,10 +52,8 @@ func InitAndStartServer() {
 	ginEngine.Run(":" + config.Settings.Server.Port)
 }
 
-func loadSettings() {
-	// Get current path
-	currentPath := utils.GetCurrentPath()
-	jsonFile, err := os.Open(currentPath + "/server/config/settings.json")
+func loadSettings(configPath string) {
+	jsonFile, err := os.Open(configPath)
 
 	if err != nil {
 		panic(err)
