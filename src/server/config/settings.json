@@ -1,0 +1,29 @@
+{
+    "server": {
+        "port": "80"
+    },
+    "database": {
+        "host": "localhost",
+        "port": "3306",
+        "user": "root",
+        "password": "123456",
+        "conn_max_lifetime_hours": 1
+    },
+    "jwt": {
+        "secret_key": "nndWogr5q-zhquk2W5lvgAsIZR-K7wnbzv_vVYuPOnY",
+        "expire_hours": 120
+    },
+    "rabbit_mq": {
+        "host": "localhost",
+        "port": "5672",
+        "user": "root",
+        "password": "Freextech123!",
+        "virtual_host": "local"
+    },
+    "redis": {
+        "address": "localhost:6379",
+        "password": "Freextech123!",
+        "db": 0,
+        "pool_size": 20
+    }
+}

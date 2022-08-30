@@ -1,0 +1,331 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "OpenGin",
+    "description": "Golang WebAPI which powered by OpenAPI 3.0 \u0026 Gin",
+    "contact": {
+      "name": "Shone",
+      "email": "xxxxxx@gmail.com"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://mit-license.org"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1",
+      "description": " LocalTest"
+    },
+    {
+      "url": "http://www.domainname.com",
+      "description": " Production"
+    }
+  ],
+  "paths": {
+    "/v1/oauth/token": {
+      "post": {
+        "responses": {},
+        "tags": [
+          "OAuth"
+        ],
+        "summary": "OAuth登录",
+        "description": " OAuth login",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/OAuthLogin"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": null
+      }
+    },
+    "/v1/register/check_username": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UniResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Register"
+        ],
+        "summary": "检查用户名是否已注册",
+        "description": " 检查用户名",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "用户名",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string",
+              "description": "用户名"
+            }
+          }
+        ],
+        "security": null
+      }
+    },
+    "/v1/register/register": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UniResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Register"
+        ],
+        "summary": "注册新用户",
+        "description": " - 用户名\n- 密码\n- 邮箱",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": null
+      }
+    },
+    "/v1/test/hello": {
+      "get": {
+        "responses": {},
+        "tags": [
+          "Test"
+        ],
+        "summary": "Hello",
+        "description": " Just Hello",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "key here",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string",
+              "description": "key here"
+            }
+          }
+        ],
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/test/publish": {
+      "post": {
+        "responses": {},
+        "tags": [
+          "Test"
+        ],
+        "summary": "Publish message",
+        "description": " Publish message here",
+        "parameters": [
+          {
+            "name": "message",
+            "in": "query",
+            "description": "Message",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string",
+              "description": "Message"
+            }
+          }
+        ],
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/test/redis_get": {
+      "post": {
+        "responses": {},
+        "tags": [
+          "Test"
+        ],
+        "summary": "Get Message",
+        "description": " Redis: Get message",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string",
+              "description": "Key"
+            }
+          }
+        ],
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/test/redis_set": {
+      "post": {
+        "responses": {},
+        "tags": [
+          "Test"
+        ],
+        "summary": "Set Message",
+        "description": " Redis: Set message",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string",
+              "description": "Key"
+            }
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "description": "Message",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string",
+              "description": "Message"
+            }
+          }
+        ],
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/test/{key}": {
+      "get": {
+        "responses": {},
+        "tags": [
+          "Test"
+        ],
+        "summary": "Path Test",
+        "description": " Test path parameters",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "description": "Path key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string",
+              "description": "Path key"
+            }
+          }
+        ],
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "OAuthLogin": {
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "grant_type": {
+            "type": "string"
+          }
+        }
+      },
+      "Register": {
+        "type": "object",
+        "required": [
+          "username",
+          "password",
+          "email"
+        ],
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "UniResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {}
+        }
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "tokenUrl": "/v1/oauth/token",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  }
+}
