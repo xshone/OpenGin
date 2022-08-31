@@ -20,7 +20,7 @@ func (c *Controller) Token(ctx *gin.Context) {
 	var user models.User
 
 	if err := ctx.ShouldBind(&params); err == nil {
-		c.DbProvider.Db.Where("username=?", strings.ToLower(params.Username)).First(&user)
+		models.GetDB().Where("username=?", strings.ToLower(params.Username)).First(&user)
 	}
 
 	if user.ID != 0 && user.Password == params.Password {

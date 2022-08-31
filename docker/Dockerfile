@@ -10,7 +10,7 @@ RUN go build -o start_server .
 
 FROM scratch
 LABEL authors="Shone"
-ENV env=release
+ENV mode=release
 WORKDIR /home/app
 COPY --from=builder /build .
 EXPOSE 80

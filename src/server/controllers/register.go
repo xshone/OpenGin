@@ -25,7 +25,7 @@ func (c *Controller) Register(ctx *gin.Context) {
 
 	if err := ctx.ShouldBind(&params); err == nil {
 		if params.Username != "" && params.Password != "" {
-			token = services.CreateUser(c.DbProvider.Db, params)
+			token = services.CreateUser(params)
 
 			if token != "" {
 				status = http.StatusOK
@@ -62,7 +62,7 @@ func (c *Controller) CheckUsername(ctx *gin.Context) {
 		return
 	}
 
-	isExist := services.CheckUsername(c.DbProvider.Db, username)
+	isExist := services.CheckUsername(username)
 
 	if isExist {
 		ctx.JSON(http.StatusInternalServerError, schemas.UniResponse{

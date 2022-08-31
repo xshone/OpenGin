@@ -2,7 +2,6 @@ package routes
 
 import (
 	"opengin/server/controllers"
-	"opengin/server/db"
 	"opengin/server/middlewares"
 	"opengin/server/websocket"
 
@@ -10,11 +9,8 @@ import (
 )
 
 func InitRoutes(engine *gin.Engine) {
-	// Database provider
-	dbProvider := db.NewDbProvider()
-
 	// Controller
-	c := controllers.NewController(dbProvider)
+	c := controllers.NewController()
 
 	baseGroup := engine.Group("v1")
 

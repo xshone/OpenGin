@@ -1,15 +1,10 @@
 package controllers
 
-import (
-	"opengin/server/db"
-)
-
 type Controller struct {
-	DbProvider *db.DbProvider
 }
 
-func NewController(dp *db.DbProvider) *Controller {
-	return &Controller{DbProvider: dp}
+func NewController() *Controller {
+	return &Controller{}
 }
 
 type Message struct {

@@ -1,32 +1,26 @@
-package db
+package models
 
 import (
 	"opengin/server/config"
-	models "opengin/server/models"
 	"time"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
-type DbProvider struct {
-	Db *gorm.DB
-}
+var DB *gorm.DB
 
-func NewDbProvider() *DbProvider {
+func Init() *gorm.DB {
 	dbUser := config.Settings.Database.User
 	dbPwd := config.Settings.Database.Password
 	dbHost := config.Settings.Database.Host
 	dbPort := config.Settings.Database.Port
-	// dsn := "root:123456@tcp(localhost:3306)/godb?charset=utf8mb4&parseTime=True&loc=Local"
 	dsn := dbUser + ":" + dbPwd + "@tcp(" + dbHost + ":" + dbPort + ")/godb?charset=utf8mb4&parseTime=True&loc=Local"
 	gormDb, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		panic(err)
 	}
-
-	gormDb.AutoMigrate(&models.User{}, &models.Role{})
 
 	sqlDB, err := gormDb.DB()
 
@@ -37,6 +31,18 @@ func NewDbProvider() *DbProvider {
 	sqlDB.SetConnMaxIdleTime(10)
 	sqlDB.SetMaxOpenConns(100)
 	sqlDB.SetConnMaxLifetime(time.Hour * time.Duration(config.Settings.Database.ConnMaxLifetimeHours))
+	DB = gormDb
 
-	return &DbProvider{Db: gormDb}
+	return gormDb
+}
+
+func GetDB() *gorm.DB {
+	return DB
+}
+
+func Migrate() {
+	DB.AutoMigrate(
+		&User{},
+		&Role{},
+	)
 }
