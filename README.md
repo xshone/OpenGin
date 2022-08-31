@@ -1,7 +1,7 @@
 ## OpenGin
 
 [![version](https://img.shields.io/badge/version-1.0.0-blue)]()
-[![licence](https://img.shields.io/github/license/xshone/OpenGin)](https://github.com/xshone/OpenGin/blob/main/LICENSE)
+[![licence](https://img.shields.io/github/license/xshone/OpenGin)](https://github.com/xshone/OpenGin/blob/master/LICENSE)
 [![issues](https://img.shields.io/github/issues/xshone/OpenGin)](https://github.com/xshone/OpenGin/issues)
 
 <p>OpenGin is a WebApi template based on <strong>Gin</strong> & <strong>OpenApi3.0</strong>.</p>
