@@ -9,19 +9,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// @Title Hello
+// @Title Hash Password
 // @Tag Test
-// @Description Just Hello
+// @Description Hash Password
 // @Security OAuth2PasswordBearer read write
-// @Param key query string true "key here"
-// @Route /v1/test/hello [get]
-func (c *Controller) Hello(ctx *gin.Context) {
-	var params schemas.LoginTest
+// @Param text query string true "text here"
+// @Route /v1/test/hash_password [get]
+func (c *Controller) HashPassword(ctx *gin.Context) {
+	var params schemas.TestText
 
 	if err := ctx.ShouldBind(&params); err == nil {
+		hashedPassword := utils.HashPassword(params.Text, utils.GetUUID())
+
 		ctx.JSON(http.StatusOK, schemas.UniResponse{
 			Code:    200,
-			Message: "Hello " + params.Key,
+			Message: hashedPassword,
 			Data:    nil,
 		})
 		return

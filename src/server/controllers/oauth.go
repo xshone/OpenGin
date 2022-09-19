@@ -10,11 +10,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// @Title OAuth登录
-// @Tag OAuth
-// @Description OAuth login
-// @Param request form schemas.OAuthLogin true "_"
-// @Route /v1/oauth/token [post]
 func (c *Controller) Token(ctx *gin.Context) {
 	var params schemas.OAuthLogin
 	var user models.User
@@ -23,7 +18,7 @@ func (c *Controller) Token(ctx *gin.Context) {
 		models.GetDB().Where("username=?", strings.ToLower(params.Username)).First(&user)
 	}
 
-	if user.ID != 0 && user.Password == params.Password {
+	if user.ID != 0 && user.PasswordHash == utils.HashPassword(params.Password, user.PasswordSalt) {
 		token, err := utils.CreateToken(user.ID)
 
 		if err == nil {

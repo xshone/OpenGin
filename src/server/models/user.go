@@ -5,11 +5,13 @@ import (
 )
 
 type User struct {
-	ID       int `gorm:"primaryKey;autoIncrement"`
-	Username string
-	Password string
-	Email    string
-	Time     base.CreateUpdateTime `gorm:"embedded"`
+	ID           int `gorm:"primaryKey;autoIncrement"`
+	Username     string
+	PasswordHash string
+	PasswordSalt string
+	Phone        string
+	Email        string
+	Time         base.CreateUpdateTime `gorm:"embedded"`
 }
 
 func (u *User) TableName() string {

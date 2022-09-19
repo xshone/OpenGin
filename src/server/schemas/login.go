@@ -11,6 +11,6 @@ type OAuthLogin struct {
 	GrantType string `form:"grant_type" json:"grant_type"`
 }
 
-type LoginTest struct {
-	Key string `json:"key" form:"key"`
+type TestText struct {
+	Text string `json:"text" form:"text"`
 }

@@ -21,10 +21,14 @@ func GetUser(username string) models.User {
 }
 
 func CreateUser(params schemas.Register) string {
+	passwordSalt := utils.GetUUID()
+	hashedPassword := utils.HashPassword(params.Password, passwordSalt)
+
 	user := models.User{
-		Username: params.Username,
-		Password: params.Password,
-		Email:    params.Email,
+		Username:     params.Username,
+		PasswordHash: hashedPassword,
+		PasswordSalt: passwordSalt,
+		Email:        params.Email,
 	}
 
 	result := models.GetDB().Create(&user)

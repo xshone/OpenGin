@@ -25,15 +25,16 @@ func InitRoutes(engine *gin.Engine) {
 	oauthGroup := baseGroup.Group("oauth")
 	oauthGroup.POST("/token", c.Token)
 
-	// Register
-	registerGroup := baseGroup.Group("register")
-	registerGroup.POST("/register", c.Register)
+	// Accounts
+	registerGroup := baseGroup.Group("accounts")
 	registerGroup.GET("/check_user", c.CheckUsername)
+	registerGroup.POST("/register", c.Register)
+	registerGroup.POST("/login", c.Login)
 
 	// Test
 	testGroup := baseGroup.Group("test")
 	testGroup.Use(middlewares.Auth())
-	testGroup.GET("/hello", c.Hello)
+	testGroup.GET("/hash_password", c.HashPassword)
 	testGroup.GET("/:key", c.PathTest)
 	testGroup.POST("/publish", c.PublishMessage)
 	testGroup.POST("/redis_set", c.RedisSet)
