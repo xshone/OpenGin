@@ -106,7 +106,7 @@ func (c *Controller) Login(ctx *gin.Context) {
 			data.Token = token
 
 			ctx.JSON(http.StatusOK, schemas.UniResponse{
-				Code:    500,
+				Code:    200,
 				Message: "Login Success",
 				Data:    data,
 			})
@@ -114,5 +114,10 @@ func (c *Controller) Login(ctx *gin.Context) {
 		}
 	}
 
-	http.Error(ctx.Writer, "Failed to login", http.StatusUnauthorized)
+	// http.Error(ctx.Writer, "Failed to login", http.StatusUnauthorized)
+	ctx.JSON(http.StatusOK, schemas.UniResponse{
+		Code:    403,
+		Message: "Failed to login",
+		Data:    nil,
+	})
 }
